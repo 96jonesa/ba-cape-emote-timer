@@ -15,7 +15,7 @@ public interface BACapeEmoteTimerConfig extends Config
 	@ConfigItem(
 		keyName = "addMovementTick",
 		name = "Add movement tick",
-		description = "Add the extra tick the emote takes when clicked while moving. Off assumes you click it standing still.",
+		description = "While you are moving, add the extra tick the emote takes when clicked mid-walk. Off always assumes you click it standing still.",
 		position = 0
 	)
 	default boolean addMovementTick()

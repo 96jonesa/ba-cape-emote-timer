@@ -11,7 +11,9 @@ import net.runelite.api.EquipmentInventorySlot;
 import net.runelite.api.GameState;
 import net.runelite.api.Item;
 import net.runelite.api.ItemContainer;
+import net.runelite.api.Player;
 import net.runelite.api.events.ChatMessage;
+import net.runelite.api.events.GameTick;
 import net.runelite.api.events.GameStateChanged;
 import net.runelite.api.events.VarbitChanged;
 import net.runelite.api.gameval.InventoryID;
@@ -35,6 +37,8 @@ public class BACapeEmoteTimerPlugin extends Plugin
 
 	@Getter(AccessLevel.PACKAGE)
 	private final WaveClock waveClock = new WaveClock();
+
+	private final MovementTracker movementTracker = new MovementTracker();
 
 	@Inject
 	private Client client;
@@ -62,6 +66,15 @@ public class BACapeEmoteTimerPlugin extends Plugin
 	{
 		overlayManager.remove(overlay);
 		waveClock.stop();
+		movementTracker.reset();
+	}
+
+	/**
+	 * Whether the player changed tile on the latest game tick.
+	 */
+	boolean isMoving()
+	{
+		return movementTracker.isMoving();
 	}
 
 	/**
@@ -92,6 +105,13 @@ public class BACapeEmoteTimerPlugin extends Plugin
 	}
 
 	@Subscribe
+	public void onGameTick(GameTick event)
+	{
+		Player player = client.getLocalPlayer();
+		movementTracker.update(player == null ? null : player.getWorldLocation());
+	}
+
+	@Subscribe
 	public void onVarbitChanged(VarbitChanged event)
 	{
 		// Set while inside a wave, cleared on leaving it (completion, death or exiting)
@@ -107,6 +127,7 @@ public class BACapeEmoteTimerPlugin extends Plugin
 		if (event.getGameState() == GameState.LOGIN_SCREEN || event.getGameState() == GameState.HOPPING)
 		{
 			waveClock.stop();
+			movementTracker.reset();
 		}
 	}
 }
