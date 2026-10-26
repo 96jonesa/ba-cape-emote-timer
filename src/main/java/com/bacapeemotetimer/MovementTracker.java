@@ -6,6 +6,8 @@ import net.runelite.api.coords.WorldPoint;
 
 /**
  * Whether the player changed tile on the latest game tick, from the tile seen on each tick.
+ * Movement happens at the start of a tick, before any click made during it, so an emote
+ * clicked on the tick of the player's last step still counts as clicked while moving.
  */
 class MovementTracker
 {
