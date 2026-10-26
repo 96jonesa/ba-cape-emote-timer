@@ -61,8 +61,14 @@ class CapeEmoteTest
 		@Test
 		void startsOnTheTickAfterTheClickAndLastsTheStall()
 		{
-			assertEquals(1 + 1 + 6, CapeEmote.ATTACK.finishTick(1));
-			assertEquals(100 + 1 + 32, CapeEmote.ACHIEVEMENT_DIARY.finishTick(100));
+			assertEquals(1 + 1 + 6, CapeEmote.ATTACK.finishTick(1, false));
+			assertEquals(100 + 1 + 32, CapeEmote.ACHIEVEMENT_DIARY.finishTick(100, false));
+		}
+
+		@Test
+		void takesOneTickLongerWhileMoving()
+		{
+			assertEquals(1 + 1 + 6 + 1, CapeEmote.ATTACK.finishTick(1, true));
 		}
 	}
 }

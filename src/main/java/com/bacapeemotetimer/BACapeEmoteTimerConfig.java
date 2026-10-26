@@ -13,10 +13,21 @@ public interface BACapeEmoteTimerConfig extends Config
 	String GROUP = "baCapeEmoteTimer";
 
 	@ConfigItem(
+		keyName = "addMovementTick",
+		name = "Add movement tick",
+		description = "Add the extra tick the emote takes when clicked while moving. Off assumes you click it standing still.",
+		position = 0
+	)
+	default boolean addMovementTick()
+	{
+		return false;
+	}
+
+	@ConfigItem(
 		keyName = "textColor",
 		name = "Text color",
 		description = "Color of the emote finish time.",
-		position = 0
+		position = 1
 	)
 	default Color textColor()
 	{
@@ -27,7 +38,7 @@ public interface BACapeEmoteTimerConfig extends Config
 		keyName = "font",
 		name = "Font",
 		description = "Font of the emote finish time.",
-		position = 1
+		position = 2
 	)
 	default TimerFont font()
 	{
@@ -38,7 +49,7 @@ public interface BACapeEmoteTimerConfig extends Config
 		keyName = "bold",
 		name = "Bold",
 		description = "Draw the emote finish time in bold.",
-		position = 2
+		position = 3
 	)
 	default boolean bold()
 	{
@@ -50,7 +61,7 @@ public interface BACapeEmoteTimerConfig extends Config
 		keyName = "fontSize",
 		name = "Font size",
 		description = "Size of the emote finish time text. 16 is the game's normal size.",
-		position = 3
+		position = 4
 	)
 	default int fontSize()
 	{
@@ -61,7 +72,7 @@ public interface BACapeEmoteTimerConfig extends Config
 		keyName = "showBackground",
 		name = "Background",
 		description = "Draw a rectangle behind the emote finish time.",
-		position = 4
+		position = 5
 	)
 	default boolean showBackground()
 	{
@@ -72,7 +83,7 @@ public interface BACapeEmoteTimerConfig extends Config
 		keyName = "backgroundColor",
 		name = "Background color",
 		description = "Color of the rectangle behind the emote finish time.",
-		position = 5
+		position = 6
 	)
 	default Color backgroundColor()
 	{
@@ -85,7 +96,7 @@ public interface BACapeEmoteTimerConfig extends Config
 		keyName = "backgroundOpacity",
 		name = "Background opacity",
 		description = "Opacity of the rectangle behind the emote finish time, from 0 (invisible) to 100 (solid).",
-		position = 6
+		position = 7
 	)
 	default int backgroundOpacity()
 	{

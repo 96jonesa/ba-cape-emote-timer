@@ -65,7 +65,7 @@ class BACapeEmoteTimerOverlay extends Overlay
 			return null;
 		}
 
-		String text = WaveClock.format(emote.finishTick(clock.elapsedTicks(client.getTickCount())));
+		String text = WaveClock.format(emote.finishTick(clock.elapsedTicks(client.getTickCount()), config.addMovementTick()));
 
 		Rectangle button = emoteButton.getBounds();
 		graphics.setFont(font());

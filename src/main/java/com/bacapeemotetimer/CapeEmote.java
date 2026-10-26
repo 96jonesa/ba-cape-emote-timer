@@ -124,12 +124,12 @@ enum CapeEmote
 
 	/**
 	 * The wave tick the emote finishes on if it is clicked while the wave clock reads
-	 * {@code elapsedTicks} and the player is standing still. The click is processed on
-	 * the next tick, which starts the stall, and the player is free again once all of
-	 * its ticks have passed.
+	 * {@code elapsedTicks}. The click is processed on the next tick, which starts the
+	 * stall, and the player is free again once all of its ticks have passed. Clicking
+	 * while moving takes one tick longer.
 	 */
-	int finishTick(int elapsedTicks)
+	int finishTick(int elapsedTicks, boolean moving)
 	{
-		return elapsedTicks + 1 + stallTicks;
+		return elapsedTicks + 1 + stallTicks + (moving ? 1 : 0);
 	}
 }
