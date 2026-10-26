@@ -1,0 +1,135 @@
+package com.bacapeemotetimer;
+
+import com.google.common.collect.ImmutableMap;
+import java.util.Map;
+import javax.annotation.Nullable;
+import lombok.Getter;
+import net.runelite.api.gameval.ItemID;
+
+/**
+ * The Skill Cape emote of each cape that has one, with the number of game ticks
+ * the emote stalls the player for.
+ *
+ * <p>Stall lengths are transcribed whole from the "Emote durations" table of
+ * https://oldschool.runescape.wiki/w/Skill_Cape_(emote). Trimmed and untrimmed capes
+ * share an emote, and every max cape variant performs the max cape emote. The music
+ * cape has no Skill Cape emote (it grants Air Guitar instead), so it is not listed.
+ */
+enum CapeEmote
+{
+	AGILITY(7, ItemID.SKILLCAPE_AGILITY, ItemID.SKILLCAPE_AGILITY_TRIMMED,
+		ItemID.SKILLCAPE_AGILITY_WORN, ItemID.SKILLCAPE_AGILITY_TRIMMED_WORN),
+	ATTACK(6, ItemID.SKILLCAPE_ATTACK, ItemID.SKILLCAPE_ATTACK_TRIMMED),
+	CONSTRUCTION(12, ItemID.SKILLCAPE_CONSTRUCTION, ItemID.SKILLCAPE_CONSTRUCTION_TRIMMED),
+	COOKING(25, ItemID.SKILLCAPE_COOKING, ItemID.SKILLCAPE_COOKING_TRIMMED),
+	CRAFTING(13, ItemID.SKILLCAPE_CRAFTING, ItemID.SKILLCAPE_CRAFTING_TRIMMED),
+	DEFENCE(8, ItemID.SKILLCAPE_DEFENCE, ItemID.SKILLCAPE_DEFENCE_TRIMMED),
+	FARMING(10, ItemID.SKILLCAPE_FARMING, ItemID.SKILLCAPE_FARMING_TRIMMED),
+	FIREMAKING(7, ItemID.SKILLCAPE_FIREMAKING, ItemID.SKILLCAPE_FIREMAKING_TRIMMED),
+	FISHING(12, ItemID.SKILLCAPE_FISHING, ItemID.SKILLCAPE_FISHING_TRIMMED),
+	FLETCHING(13, ItemID.SKILLCAPE_FLETCHING, ItemID.SKILLCAPE_FLETCHING_TRIMMED),
+	HERBLORE(14, ItemID.SKILLCAPE_HERBLORE, ItemID.SKILLCAPE_HERBLORE_TRIMMED),
+	HITPOINTS(6, ItemID.SKILLCAPE_HITPOINTS, ItemID.SKILLCAPE_HITPOINTS_TRIMMED),
+	HUNTER(12, ItemID.SKILLCAPE_HUNTING, ItemID.SKILLCAPE_HUNTING_TRIMMED),
+	MAGIC(5, ItemID.SKILLCAPE_MAGIC, ItemID.SKILLCAPE_MAGIC_TRIMMED),
+	MINING(8, ItemID.SKILLCAPE_MINING, ItemID.SKILLCAPE_MINING_TRIMMED),
+	PRAYER(10, ItemID.SKILLCAPE_PRAYER, ItemID.SKILLCAPE_PRAYER_TRIMMED),
+	RANGED(9, ItemID.SKILLCAPE_RANGING, ItemID.SKILLCAPE_RANGING_TRIMMED),
+	RUNECRAFT(10, ItemID.SKILLCAPE_RUNECRAFTING, ItemID.SKILLCAPE_RUNECRAFTING_TRIMMED),
+	SAILING(15, ItemID.SKILLCAPE_SAILING, ItemID.SKILLCAPE_SAILING_TRIMMED),
+	SLAYER(5, ItemID.SKILLCAPE_SLAYER, ItemID.SKILLCAPE_SLAYER_TRIMMED),
+	SMITHING(20, ItemID.SKILLCAPE_SMITHING, ItemID.SKILLCAPE_SMITHING_TRIMMED),
+	STRENGTH(15, ItemID.SKILLCAPE_STRENGTH, ItemID.SKILLCAPE_STRENGTH_TRIMMED),
+	THIEVING(5, ItemID.SKILLCAPE_THIEVING, ItemID.SKILLCAPE_THIEVING_TRIMMED),
+	WOODCUTTING(20, ItemID.SKILLCAPE_WOODCUTTING, ItemID.SKILLCAPE_WOODCUTTING_TRIMMED),
+	QUEST_POINT(15, ItemID.SKILLCAPE_QP, ItemID.SKILLCAPE_QP_TRIMMED),
+	ACHIEVEMENT_DIARY(32, ItemID.SKILLCAPE_AD, ItemID.SKILLCAPE_AD_TRIMMED),
+	MAX(8,
+		ItemID.SKILLCAPE_MAX,
+		ItemID.SKILLCAPE_MAX_WORN,
+		ItemID.SKILLCAPE_MAX_FIRECAPE,
+		ItemID.SKILLCAPE_MAX_FIRECAPE_BROKEN,
+		ItemID.SKILLCAPE_MAX_FIRECAPE_TROUVER,
+		ItemID.SKILLCAPE_MAX_SARADOMIN,
+		ItemID.SKILLCAPE_MAX_ZAMORAK,
+		ItemID.SKILLCAPE_MAX_GUTHIX,
+		ItemID.SKILLCAPE_MAX_SARADOMIN2,
+		ItemID.SKILLCAPE_MAX_SARADOMIN2_BROKEN,
+		ItemID.SKILLCAPE_MAX_SARADOMIN2_TROUVER,
+		ItemID.SKILLCAPE_MAX_ZAMORAK2,
+		ItemID.SKILLCAPE_MAX_ZAMORAK2_BROKEN,
+		ItemID.SKILLCAPE_MAX_ZAMORAK2_TROUVER,
+		ItemID.SKILLCAPE_MAX_GUTHIX2,
+		ItemID.SKILLCAPE_MAX_GUTHIX2_BROKEN,
+		ItemID.SKILLCAPE_MAX_GUTHIX2_TROUVER,
+		ItemID.SKILLCAPE_MAX_ANMA,
+		ItemID.SKILLCAPE_MAX_ARDY,
+		ItemID.SKILLCAPE_MAX_INFERNALCAPE,
+		ItemID.SKILLCAPE_MAX_INFERNALCAPE_BROKEN,
+		ItemID.SKILLCAPE_MAX_INFERNALCAPE_TROUVER,
+		ItemID.SKILLCAPE_MAX_INFERNALCAPE_TROUVER_BROKEN,
+		ItemID.SKILLCAPE_MAX_INFERNALCAPE_TROUVER_MANGLED,
+		ItemID.SKILLCAPE_MAX_ASSEMBLER,
+		ItemID.SKILLCAPE_MAX_ASSEMBLER_BROKEN,
+		ItemID.SKILLCAPE_MAX_ASSEMBLER_TROUVER,
+		ItemID.SKILLCAPE_MAX_ASSEMBLER_MASORI,
+		ItemID.SKILLCAPE_MAX_ASSEMBLER_MASORI_BROKEN,
+		ItemID.SKILLCAPE_MAX_ASSEMBLER_MASORI_TROUVER,
+		ItemID.SKILLCAPE_MAX_MYTHICAL,
+		ItemID.SKILLCAPE_MAX_DIZANAS,
+		ItemID.SKILLCAPE_MAX_DIZANAS_BROKEN,
+		ItemID.SKILLCAPE_MAX_DIZANAS_TROUVER,
+		ItemID.SKILLCAPE_MAX_DIZANAS_TROUVER_BROKEN,
+		ItemID.SKILLCAPE_MAX_DIZANAS_TROUVER_MANGLED),
+	CABBAGE(2, ItemID.SKILLCAPE_CABBAGE),
+	BANANA(9, ItemID.OSB8_SKILLCAPE_BANANA);
+
+	private static final Map<Integer, CapeEmote> BY_ITEM_ID;
+
+	static
+	{
+		ImmutableMap.Builder<Integer, CapeEmote> builder = ImmutableMap.builder();
+		for (CapeEmote emote : values())
+		{
+			for (int itemId : emote.itemIds)
+			{
+				builder.put(itemId, emote);
+			}
+		}
+		BY_ITEM_ID = builder.build();
+	}
+
+	/**
+	 * Game ticks the emote stalls the player for.
+	 */
+	@Getter
+	private final int stallTicks;
+
+	private final int[] itemIds;
+
+	CapeEmote(int stallTicks, int... itemIds)
+	{
+		this.stallTicks = stallTicks;
+		this.itemIds = itemIds;
+	}
+
+	/**
+	 * The emote performed while wearing the cape {@code itemId}, or null if it has none.
+	 */
+	@Nullable
+	static CapeEmote forItem(int itemId)
+	{
+		return BY_ITEM_ID.get(itemId);
+	}
+
+	/**
+	 * The wave tick the emote finishes on if it is clicked while the wave clock reads
+	 * {@code elapsedTicks} and the player is standing still. The click is processed on
+	 * the next tick, which starts the stall, and the player is free again once all of
+	 * its ticks have passed.
+	 */
+	int finishTick(int elapsedTicks)
+	{
+		return elapsedTicks + 1 + stallTicks;
+	}
+}
